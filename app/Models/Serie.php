@@ -13,7 +13,26 @@ class Serie extends Model
         'nome'
     ];
 
+    protected $appends = ['links'];
+
     public $timestamps = false;
+
+    
+ 
+
+    public function getLinksAttribute($links): array
+    {
+        return [
+            'self' => '/api/series/'. $this->id,
+            'episodios' => '/api/series/' . $this->id . '/episodios'
+        ];
+
+    }
+
+    public function setNomeAttribute($nome)
+    {
+      $this->attributes['nome'] = strtoupper($nome);
+    }
 
     public function serie()
     {
